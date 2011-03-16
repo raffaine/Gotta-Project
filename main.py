@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from google.appengine.api import users
+
 from google.appengine.ext import db
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
@@ -12,11 +14,16 @@ class Shout( db.Model ):
 
 class MainHandler(webapp.RequestHandler):
 	def get(self):
-		shouts = db.GqlQuery('SELECT * FROM Shout '
-							'ORDER BY when ASC')
-		values = {'shouts' : shouts }
-		self.response.out.write(template.render('main.html',values))
-
+		user = users.get_current_user()
+		
+		if user:
+			shouts = db.GqlQuery('SELECT * FROM Shout '
+				        'ORDER BY when ASC')
+			values = {'shouts' : shouts }
+			self.response.out.write(template.render('main.html',values))
+		else:
+			self.redirect(users.create_login_url(self.request.uri))
+			
 	def post(self):		
 		sh = Shout( message = self.request.get('message'),
 					who = self.request.get('who'))
