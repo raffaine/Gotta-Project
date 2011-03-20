@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2> Here we are in your schedule ...look at how is it going! </h2>
+
+<div id="mainvalue">Well ... actually you have {{curbalance}}</div>
+<div id="schedule">	
+	{% for daybal in balances %}
+	<div id="daybalance"> {{daybal}} </div>
+	{% endfor %}
+</div>
+
+<form class="expense" action="" method="post" >
+	<p>Put a new expense in your schedule ... :( </p>
+	<input type="hidden" value="newexpense" name="action" />
+	<p>Name: <input type="text" value="" name="name" id="name" /></p>
+	<p>Cost: <input type="number" min="0" step="50" value="" name="cost" id="cost" /></p>
+	<p>Date: <input type="date" value="" name="date" id="date" /></p>
+	<p>Description</p>
+	<textarea rows="3" cols="20" name="desc" id="desc"></textarea>
+	<p> <input type="submit" value="Continue &rarr;" /> </p>
+</form>
+
+{% endblock %}

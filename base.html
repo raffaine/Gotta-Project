@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html>
+
+<header>
+<title>{% block title %} Gotta Project! Life Project made easier {% endblock %}</title>
+{% block header %} {% endblock %}
+</header>
+
+<body>
+<div id="sitetitle">
+</div>
+<div id="menubar">
+{% block menubar %}
+{% endblock %}
+</div>
+<div id="content">
+{% block content %}
+{% endblock %}
+</div>
+</body>
+
+</html>
